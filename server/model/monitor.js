@@ -1,5 +1,6 @@
 const https = require("https");
 const dayjs = require("dayjs");
+const qs = require("qs");
 const utc = require("dayjs/plugin/utc");
 let timezone = require("dayjs/plugin/timezone");
 dayjs.extend(utc);
@@ -99,6 +100,7 @@ class Monitor extends BeanModel {
             authMethod: this.authMethod,
             authWorkstation: this.authWorkstation,
             authDomain: this.authDomain,
+            httpContentType: this.httpContentType,
         };
 
         if (includeSensitiveData) {
@@ -240,7 +242,10 @@ class Monitor extends BeanModel {
                     const options = {
                         url: this.url,
                         method: (this.method || "get").toLowerCase(),
-                        ...(this.body ? { data: JSON.parse(this.body) } : {}),
+                        ...(this.body ? {
+                            data: this.httpContentType === "application/x-www-form-urlencoded"
+                                ? qs.stringify(JSON.parse(this.body))
+                                : JSON.parse(this.body) } : {}),
                         timeout: this.interval * 1000 * 0.8,
                         headers: {
                             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
