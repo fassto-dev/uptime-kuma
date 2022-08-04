@@ -674,6 +674,7 @@ let needSetup = false;
                 bean.authMethod = monitor.authMethod;
                 bean.authWorkstation = monitor.authWorkstation;
                 bean.authDomain = monitor.authDomain;
+                bean.httpContentType = monitor.httpContentType;
 
                 await R.store(bean);
 
@@ -1266,6 +1267,7 @@ let needSetup = false;
                                 dns_resolve_server: monitorListData[i].dns_resolve_server,
                                 notificationIDList: {},
                                 proxy_id: monitorListData[i].proxy_id || null,
+                                httpContentType: monitorListData[i].httpContentType,
                             };
 
                             if (monitorListData[i].pushToken) {

@@ -95,6 +95,7 @@
         "password-hash": "~1.2.2",
         "prom-client": "~13.2.0",
         "prometheus-api-metrics": "~3.2.1",
+        "qs": "^6.11.0",
         "redbean-node": "0.1.4",
         "socket.io": "~4.4.1",
         "socket.io-client": "~4.4.1",

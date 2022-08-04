@@ -356,11 +356,26 @@
                                     </select>
                                 </div>
 
-                                <!-- Body -->
-                                <div class="my-3">
-                                    <label for="body" class="form-label">{{ $t("Body") }}</label>
-                                    <textarea id="body" v-model="monitor.body" class="form-control" :placeholder="bodyPlaceholder"></textarea>
-                                </div>
+                                <template v-if="['POST', 'PUT', 'PATCH'].includes(monitor.method)">
+                                    <!-- Content-Type -->
+                                    <div class="my-3">
+                                        <label for="http-content-type" class="form-label">{{ $t("Content-Type") }}</label>
+                                        <select id="http-content-type" v-model="monitor.httpContentType" class="form-select">
+                                            <option value="application/json">
+                                                application/json
+                                            </option>
+                                            <option value="application/x-www-form-urlencoded">
+                                                application/x-www-form-urlencoded
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Body -->
+                                    <div class="my-3">
+                                        <label for="body" class="form-label">{{ $t("Body") }}</label>
+                                        <textarea id="body" v-model="monitor.body" class="form-control" :placeholder="bodyPlaceholder"></textarea>
+                                    </div>
+                                </template>
 
                                 <!-- Headers -->
                                 <div class="my-3">
@@ -600,6 +615,7 @@ export default {
                     mqttTopic: "",
                     mqttSuccessMessage: "",
                     authMethod: null,
+                    httpContentType: "application/json",
                 };
 
                 if (this.$root.proxyList && !this.monitor.proxyId) {
