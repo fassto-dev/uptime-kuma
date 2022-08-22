@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - pull
+      - $_IMAGE_BASE:$TAG_NAME
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - tag
+      - $_IMAGE_BASE:$TAG_NAME
+      - $_IMAGE_BASE:current
+
+images:
+  - $_IMAGE_BASE:current
