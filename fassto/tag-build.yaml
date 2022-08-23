@@ -8,6 +8,9 @@ steps:
       - --file=fassto/Dockerfile
       - .
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 images:
   - $_IMAGE_BASE:$TAG_NAME
   - $_IMAGE_BASE:latest
